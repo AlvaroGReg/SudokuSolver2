@@ -10,16 +10,6 @@ class Solver {
     int selected_row;
     int selected_column;
 
-    //        board = new int[][]{{0, 0, 0, 0, 5, 0, 0, 0, 0},
-    //                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //                            {0, 0, 0, 0, 0, 0, 0, 0, 0}};
-
     Solver(){
         selected_row = -1;
         selected_column = -1;
@@ -46,7 +36,7 @@ class Solver {
             }
         }
     }
-
+//CHECK IF DONE
     private boolean check(int row, int col){
         if (this.board[row][col] > 0){
             for (int i=0; i<9; i++){
@@ -74,6 +64,7 @@ class Solver {
         return true;
     }
 
+//SOLVE SUDOKU
     public boolean solve(SudokuBoard display){
         int row = -1;
         int col = -1;
@@ -108,7 +99,7 @@ class Solver {
         return false;
 
     }
-
+//  CLEAR BOARD
     public void resetBoard(){
         for (int r=0; r<9; r++){
             for (int c=0; c<9; c++){
@@ -119,6 +110,7 @@ class Solver {
         this.emptyBoxIndex = new ArrayList<>();
     }
 
+//    CHECK WHERE TO PLACE NUMBERS
     public void setNumberPos(int num){
         if (this.selected_row != -1 && this.selected_column != -1){
             if (this.board[this.selected_row-1][this.selected_column-1] == num){
@@ -127,7 +119,6 @@ class Solver {
             else{
                 this.board[this.selected_row-1][this.selected_column-1] = num;
 
-                //extra stuff
                 if (!check(this.selected_row-1, this.selected_column-1)){
                     this.board[this.selected_row-1][this.selected_column-1] = -num;
                 }
@@ -135,6 +126,7 @@ class Solver {
         }
     }
 
+//    GETTERS AND SETTERS
     public int[][] getBoard(){
         return this.board;
     }
