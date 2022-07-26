@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 class SudokuBoard extends View {
+
     private final int boardColor;
     private final int cellFillColor;
     private final int cellsHighlightColor;
@@ -39,6 +40,7 @@ class SudokuBoard extends View {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SudokuBoard,
                 0, 0);
 
+//CHARGE COLOR OPTIONS
         try{
             boardColor = a.getInteger(R.styleable.SudokuBoard_boardColor, 0);
             cellFillColor = a.getInteger(R.styleable.SudokuBoard_cellFillColor, 0);
@@ -51,6 +53,7 @@ class SudokuBoard extends View {
         }
     }
 
+//ADAPTS SIZE TO SCREEN
     @Override
     protected void onMeasure(int width, int height){
         super.onMeasure(width, height);
@@ -61,6 +64,7 @@ class SudokuBoard extends View {
         setMeasuredDimension(dimension, dimension);
     }
 
+//    SET COLORS
     @Override
     protected void onDraw(Canvas canvas){
         boardColorPaint.setStyle(Paint.Style.STROKE);
@@ -85,7 +89,7 @@ class SudokuBoard extends View {
         drawBoard(canvas);
         drawNumbers(canvas);
     }
-
+// MARKS SELECTED CELL && ROW && COLUMN
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event){
@@ -109,6 +113,7 @@ class SudokuBoard extends View {
         return isValid;
     }
 
+//    APPLY COLORS TO TEXT
     private void drawNumbers(Canvas canvas){
 
         letterPaint.setTextSize(cellSize);
@@ -158,7 +163,7 @@ class SudokuBoard extends View {
                     letterPaint);
         }
     }
-
+// SET COLOR TO CELLS THEN LANES  AND BOARD
     private void colorCell(Canvas canvas, int r, int c){
         if(solver.getSelectedColumn() != -1 && solver.getSelectedRow() != -1){
             canvas.drawRect((c-1)*cellSize, 0, c*cellSize, cellSize*9,
